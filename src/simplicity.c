@@ -2,6 +2,7 @@
 
 Window *window;
 TextLayer *text_date_layer;
+TextLayer *text_delta_layer;
 TextLayer *text_time_layer;
 Layer *line_layer;
 
@@ -11,19 +12,20 @@ void line_layer_update_callback(Layer *layer, GContext* ctx) {
 }
 
 typedef struct{
-	char name[20];
+	char name[40];
 	int time;
 } Event;
 
-Event events[] = {{"coming soon", 1423363000}};
+Event events[] = {{"old history", 20054}, {"Practice Round\nTable3 Side2", 1423404900}};
 int numEvents = sizeof(events)/sizeof(events[0]);
 
 Event nextEvent(){
 	int i = 0;
 	while (i < numEvents){
-		if (events[i].time > time(NULL)){
+		if (events[i].time >= time(NULL)){
 			return events[i];
 		}
+		i++;
 	}
 	Event never = {"Nothing", 1423363015};
 	return never;
@@ -47,6 +49,13 @@ void handle_minute_tick(struct tm *tick_time, TimeUnits units_changed) {
 	Event next = nextEvent();
 	APP_LOG(APP_LOG_LEVEL_DEBUG, "{%s, %d}", next.name, next.time);
 	text_layer_set_text(text_date_layer, next.name);
+	
+	char deltaText[] = "in XXXX minutes  ";
+	
+	int dt = next.time - time(NULL);
+	snprintf(deltaText, sizeof(deltaText)-1, "in %d minutes", (dt+30)/60);
+	
+	text_layer_set_text(text_delta_layer, deltaText);
 
 
   if (clock_is_24h_style()) {
@@ -77,11 +86,17 @@ void handle_init(void) {
 
   Layer *window_layer = window_get_root_layer(window);
 
-  text_date_layer = text_layer_create(GRect(8, 68, 144-8, 168-68));
+  text_date_layer = text_layer_create(GRect(8, 65, 144-8, 168-65));
   text_layer_set_text_color(text_date_layer, GColorWhite);
   text_layer_set_background_color(text_date_layer, GColorClear);
   text_layer_set_font(text_date_layer, fonts_get_system_font(FONT_KEY_ROBOTO_CONDENSED_21));
   layer_add_child(window_layer, text_layer_get_layer(text_date_layer));
+
+  text_delta_layer = text_layer_create(GRect(8, 130, 144-8, 168-130));
+  text_layer_set_text_color(text_delta_layer, GColorWhite);
+  text_layer_set_background_color(text_delta_layer, GColorClear);
+  text_layer_set_font(text_delta_layer, fonts_get_system_font(FONT_KEY_ROBOTO_CONDENSED_21));
+  layer_add_child(window_layer, text_layer_get_layer(text_delta_layer));
 
   text_time_layer = text_layer_create(GRect(7, 2, 144-7, 168-2));
   text_layer_set_text_color(text_time_layer, GColorWhite);

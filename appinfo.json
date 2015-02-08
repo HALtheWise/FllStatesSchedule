@@ -3,8 +3,8 @@
     "capabilities": [
         ""
     ],
-    "companyName": "Pebble Technology",
-    "longName": "Simplicity",
+    "companyName": "HatTrix",
+    "longName": "Mindstorm Wizards FLL States scheduler",
     "projectType": "native",
     "resources": {
         "media": [
@@ -16,10 +16,10 @@
             }
         ]
     },
-    "shortName": "Simplicity",
+    "shortName": "FLL States",
     "uuid": "030ee5fc-518b-49e5-b9b2-0700ee92af89",
     "versionCode": 3,
-    "versionLabel": "3.0",
+    "versionLabel": "0.3",
     "watchapp": {
         "watchface": true
     }
