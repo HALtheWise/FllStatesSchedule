@@ -16,7 +16,12 @@ typedef struct{
 	int time;
 } Event;
 
-Event events[] = {{"old history", 20054}, {"Practice Round\nTable3 Side2", 1423404900}};
+Event events[] = { 
+					{"Coach's Meeting", 1423379700},
+					{"Opening Ceremonies", 1423382400}, 
+					{"PracticeRound\nTable3 Side2", 1423386900},
+						
+					{"Closing Ceremonies", 1423409400}};
 int numEvents = sizeof(events)/sizeof(events[0]);
 
 Event nextEvent(){
@@ -53,7 +58,7 @@ void handle_minute_tick(struct tm *tick_time, TimeUnits units_changed) {
 	char deltaText[] = "in XXXX minutes  ";
 	
 	int dt = next.time - time(NULL);
-	snprintf(deltaText, sizeof(deltaText)-1, "in %d minutes", (dt+30)/60);
+	snprintf(deltaText, sizeof(deltaText), "in %d minutes", (dt+30)/60);
 	
 	text_layer_set_text(text_delta_layer, deltaText);
 
