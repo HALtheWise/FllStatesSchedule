@@ -1,0 +1,19 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "HALtheWise",
+    "longName": "FLL States Scheduler",
+    "projectType": "native",
+    "resources": {
+        "media": []
+    },
+    "shortName": "FLL States Scheduler",
+    "uuid": "09890e9c-6428-4748-9263-b7948e32db1a",
+    "versionCode": 1,
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": false
+    }
+}
