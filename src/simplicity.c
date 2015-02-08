@@ -94,7 +94,7 @@ void handle_init(void) {
 
   Layer *window_layer = window_get_root_layer(window);
 
-  text_date_layer = text_layer_create(GRect(8, 65, 144-8, 168-65));
+  text_date_layer = text_layer_create(GRect(8, 65, 144-8, 130-65));
   text_layer_set_text_color(text_date_layer, GColorWhite);
   text_layer_set_background_color(text_date_layer, GColorClear);
   text_layer_set_font(text_date_layer, fonts_get_system_font(FONT_KEY_ROBOTO_CONDENSED_21));
@@ -106,7 +106,7 @@ void handle_init(void) {
   text_layer_set_font(text_delta_layer, fonts_get_system_font(FONT_KEY_ROBOTO_CONDENSED_21));
   layer_add_child(window_layer, text_layer_get_layer(text_delta_layer));
 
-  text_time_layer = text_layer_create(GRect(7, 2, 144-7, 168-2));
+  text_time_layer = text_layer_create(GRect(7, 2, 144-7, 60-2));
   text_layer_set_text_color(text_time_layer, GColorWhite);
   text_layer_set_background_color(text_time_layer, GColorClear);
   text_layer_set_font(text_time_layer, fonts_get_system_font(FONT_KEY_ROBOTO_BOLD_SUBSET_49));
