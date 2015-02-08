@@ -20,9 +20,9 @@ Event events[] = {
 					{"Coach's Meeting", 1423379700},
 					{"Opening Ceremonies", 1423382400}, 
 					{"Practice Round\nTable3 Side2", 1423386900},
-					{"Round 1\nTable2 Side2", 1423386900},
-					{"Practice Round\nTable3 Side2", 1423386900},
-					{"Practice Round\nTable3 Side2", 1423386900},
+					{"Round 1\nTable2 Side2", 1423390800},
+					{"Round 2\nTable4 Side1", 1423399800},
+					{"Round 3\nTable3 Side1", 1423403700},
 						
 					{"Closing Ceremonies", 1423409400}};
 int numEvents = sizeof(events)/sizeof(events[0]);
