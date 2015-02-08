@@ -19,7 +19,10 @@ typedef struct{
 Event events[] = { 
 					{"Coach's Meeting", 1423379700},
 					{"Opening Ceremonies", 1423382400}, 
-					{"PracticeRound\nTable3 Side2", 1423386900},
+					{"Practice Round\nTable3 Side2", 1423386900},
+					{"Round 1\nTable2 Side2", 1423386900},
+					{"Practice Round\nTable3 Side2", 1423386900},
+					{"Practice Round\nTable3 Side2", 1423386900},
 						
 					{"Closing Ceremonies", 1423409400}};
 int numEvents = sizeof(events)/sizeof(events[0]);
