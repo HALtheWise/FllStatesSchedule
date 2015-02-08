@@ -10,10 +10,29 @@ void line_layer_update_callback(Layer *layer, GContext* ctx) {
   graphics_fill_rect(ctx, layer_get_bounds(layer), 0, GCornerNone);
 }
 
+typedef struct{
+	char name[20];
+	int time;
+} Event;
+
+Event events[] = {{"coming soon", 1423363000}};
+int numEvents = sizeof(events)/sizeof(events[0]);
+
+Event nextEvent(){
+	int i = 0;
+	while (i < numEvents){
+		if (events[i].time > time(NULL)){
+			return events[i];
+		}
+	}
+	Event never = {"Nothing", 1423363015};
+	return never;
+}
+
 void handle_minute_tick(struct tm *tick_time, TimeUnits units_changed) {
   // Need to be static because they're used by the system later.
   static char time_text[] = "00:00";
-  static char date_text[] = "Xxxxxxxxx 00";
+  //static char date_text[] = "Xxxxxxxxx 00";
 
   char *time_format;
 
@@ -23,8 +42,11 @@ void handle_minute_tick(struct tm *tick_time, TimeUnits units_changed) {
   }
 
   // TODO: Only update the date when it's changed.
-  strftime(date_text, sizeof(date_text), "%B %e", tick_time);
-  text_layer_set_text(text_date_layer, date_text);
+  //strftime(date_text, sizeof(date_text), "%B %e", tick_time);
+  //text_layer_set_text(text_date_layer, date_text);
+	Event next = nextEvent();
+	APP_LOG(APP_LOG_LEVEL_DEBUG, "{%s, %d}", next.name, next.time);
+	text_layer_set_text(text_date_layer, next.name);
 
 
   if (clock_is_24h_style()) {
@@ -61,13 +83,13 @@ void handle_init(void) {
   text_layer_set_font(text_date_layer, fonts_get_system_font(FONT_KEY_ROBOTO_CONDENSED_21));
   layer_add_child(window_layer, text_layer_get_layer(text_date_layer));
 
-  text_time_layer = text_layer_create(GRect(7, 92, 144-7, 168-92));
+  text_time_layer = text_layer_create(GRect(7, 2, 144-7, 168-2));
   text_layer_set_text_color(text_time_layer, GColorWhite);
   text_layer_set_background_color(text_time_layer, GColorClear);
   text_layer_set_font(text_time_layer, fonts_get_system_font(FONT_KEY_ROBOTO_BOLD_SUBSET_49));
   layer_add_child(window_layer, text_layer_get_layer(text_time_layer));
 
-  GRect line_frame = GRect(8, 97, 139, 2);
+  GRect line_frame = GRect(8, 60, 139, 2);
   line_layer = layer_create(line_frame);
   layer_set_update_proc(line_layer, line_layer_update_callback);
   layer_add_child(window_layer, line_layer);
@@ -79,7 +101,6 @@ void handle_init(void) {
 
 int main(void) {
   handle_init();
-
   app_event_loop();
   
   handle_deinit();
